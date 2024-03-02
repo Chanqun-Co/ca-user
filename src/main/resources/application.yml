@@ -1,4 +1,9 @@
+server:
+  port: 0
+
 spring:
+  application:
+    name: ca-user
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: ${db.url:jdbc:mysql://localhost:3306/carsharing_user_dev}
@@ -19,3 +24,11 @@ spring:
             mode: none
     show-sql: false
 
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      default-zone: ${eureka.url:http://localhost:8761/eureka}
